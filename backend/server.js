@@ -13,6 +13,10 @@ const scoreRoute = require('./routes/scoreRoute.js');
 
 app.use('/api/scores', scoreRoute);
 
+app.get('/', (req, res) => {
+    res.send('OK OK OK');
+});
+
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
