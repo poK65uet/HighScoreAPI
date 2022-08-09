@@ -7,7 +7,7 @@ const scoreSchema = mongoose.Schema(
       required: [true, "Please add a name"],
     },
     score: {
-      type: String,
+      type: Number,
       required: [true, "Please add a text value"],
     },
   },
