@@ -35,7 +35,7 @@ const setScore = asyncHandler(async (req, res) => {
         res.status(200).json(score);
     }
     else {
-        res.status(201).send('Not top 10');
+        res.status(400).send('Not top 10');
     }
 })
 
