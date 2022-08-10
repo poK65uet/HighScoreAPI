@@ -18,12 +18,25 @@ const setScore = asyncHandler(async (req, res) => {
         throw new Error('Please add a text field');
     }
 
-    const score = await Score.create({
-        name: req.body.name,
-        score: req.body.score,
-    });
+    const scores = await Score.find();
+    const length = scores.length;
+    const result = scores.map(obj => obj.score);
+    const min = Math.min(...result);
+   
+    const newName = req.body.name;
+    const newScore = req.body.score;
 
-    res.status(200).json(score);
+    if(length < 10 || newScore > min) {
+        if(length >= 10 && newScore > min) await Score.findOneAndDelete({score: min});
+        const score = await Score.create({
+            name: newName,
+            score: newScore,
+        });
+        res.status(200).json(score);
+    }
+    else {
+        res.status(201).send('Not top 10');
+    }
 })
 
 // // @desc    Update goal
